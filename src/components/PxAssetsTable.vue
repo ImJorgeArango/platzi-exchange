@@ -1,21 +1,35 @@
 <template>
-<!--    <img class="red" :class="{ blue: true, green: false, yellow: 1 > 0 }" />-->
-    <table>
-      <thead>
+  <!--    <img class="red" :class="{ blue: true, green: false, yellow: 1 > 0 }" />-->
+  <table class="relative">
+    <thead class="pt-20 min-w-full">
       <tr class="bg-gray-100 border-b-2 border-gray-400">
         <th></th>
         <th :class="{ up: this.sortOrder === 1, down: this.sortOrder === -1 }">
-          <span class="underline cursor-pointer" @click="changeSortOrder">Ranking</span>
+          <span class="underline cursor-pointer" @click="changeSortOrder"
+            >Ranking</span
+          >
         </th>
         <th>Name</th>
         <th>Price</th>
         <th>Market capacity</th>
         <th>Variance 24hs</th>
-        <td class="hidden sm:block">
+        <td class="">
           <input
-            class="bg-gray-100 focus:outline-none border-b border-gray-400 py-2 px-4 block w-full appearance-none leading-normal"
+            class="
+              bg-gray-100
+              focus:outline-none
+              border-b border-gray-400
+              py-2
+              px-4
+              block
+              w-full
+              appearance-none
+              leading-normal
+              hidden
+              md:block
+            "
             id="filter"
-            placeholder="Buscar..."
+            placeholder="Search..."
             type="text"
             v-model="filter"
           />
@@ -31,9 +45,7 @@
         <td>
           <img
             class="w-6 h-6"
-            :src="
-              `https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`
-            "
+            :src="`https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`"
             :alt="a.name"
           />
         </td>
@@ -44,8 +56,11 @@
           <router-link
             class="hover:underline text-green-600"
             :to="{ name: 'coin-detail', params: { id: a.id } }"
-          >{{ a.name }}</router-link>
-          <small class="ml-1 text-gray-500">{{ a.symbol }}</small>
+            >{{ a.name }}</router-link
+          >
+          <small class="ml-1 block md:inline text-gray-500">{{
+            a.symbol
+          }}</small>
         </td>
         <td>{{ a.priceUsd | dollar }}</td>
         <td>{{ a.marketCapUsd | dollar }}</td>
@@ -55,7 +70,9 @@
               ? 'text-red-600'
               : 'text-green-600'
           "
-        >{{ a.changePercent24Hr | percent }}</td>
+        >
+          {{ a.changePercent24Hr | percent }}
+        </td>
         <td class="hidden sm:block">
           <px-button @custom-click="goToCoin(a.id)">
             <span>Detail</span>
@@ -67,68 +84,87 @@
 </template>
 
 <script>
-import PxButton from '@/components/PxButton'
+import PxButton from "@/components/PxButton";
 
 export default {
-  name: 'PxAssetsTable',
+  name: "PxAssetsTable",
 
   components: { PxButton },
 
   data() {
     return {
-      filter: '',
-      sortOrder: 1
-    }
+      filter: "",
+      sortOrder: 1,
+    };
   },
 
   props: {
     assets: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
 
   computed: {
     filteredAssets() {
-      const altOrder = this.sortOrder === 1 ? -1 : 1
+      const altOrder = this.sortOrder === 1 ? -1 : 1;
 
       return this.assets
         .filter(
-          a =>
+          (a) =>
             a.symbol.toLowerCase().includes(this.filter.toLowerCase()) ||
             a.name.toLowerCase().includes(this.filter.toLowerCase())
         )
         .sort((a, b) => {
           if (parseInt(a.rank) > parseInt(b.rank)) {
-            return this.sortOrder
+            return this.sortOrder;
           }
 
-          return altOrder
-        })
-    }
+          return altOrder;
+        });
+    },
   },
 
   methods: {
     goToCoin(id) {
-      this.$router.push({ name: 'coin-detail', params: { id } })
+      this.$router.push({ name: "coin-detail", params: { id } });
     },
 
     changeSortOrder() {
-      this.sortOrder = this.sortOrder === 1 ? -1 : 1
-    }
-  }
-}
+      this.sortOrder = this.sortOrder === 1 ? -1 : 1;
+    },
+  },
+};
 </script>
 
 <style scoped>
+.down,
+.up {
+  --icon-size: 1rem;
+  position: relative;
+}
+.up::before,
+.down::before {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  left: -16px;
+}
 .up::before {
-  content: '👆';
+  content: url("../assets/arrow_upward.svg");
+  /* color: red; */
 }
 
 .down::before {
-  content: '👇';
+  content: url("../assets/arrow_downward.svg");
 }
-
+table {
+  min-width: 100%;
+  width: max-content;
+  min-height: 3rem;
+}
 td {
   padding: 20px 0px;
   font-size: 0.6rem;
@@ -139,7 +175,10 @@ th {
   padding: 5px;
   font-size: 0.6rem;
 }
-
+thead > tr {
+  /* display: flex;
+  width: 100%; */
+}
 @media (min-width: 640px) {
   td,
   th {
@@ -147,7 +186,8 @@ th {
     font-size: 1rem;
   }
 
-  th {
+  th,
+  thead > tr > td {
     padding: 12px;
   }
 }

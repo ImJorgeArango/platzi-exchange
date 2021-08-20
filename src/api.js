@@ -2,7 +2,7 @@
 
 const url = "https://api.coincap.io/v2";
 // const awaitTime = 2000;
-var callsCounter = 0;
+// var callsCounter = 0;
 // function recursiveFetch(url) {
 //   return new Promise((resolve) => {
 //     fetch(`${url}`, { mode: "cors" })
@@ -22,7 +22,7 @@ var callsCounter = 0;
 // }
 
 function recursiveFetch(url) {
-  return fetch(`${url}`, { mode: "cors" }).then(async res => {
+  return fetch(`${url}`, { mode: "cors" }).then(async (res) => {
     if (res.status !== 429) {
       return res;
     } else {
@@ -36,23 +36,22 @@ function recursiveFetch(url) {
   // });
 }
 async function delayedFetch(url) {
-  callsCounter = callsCounter + 1;
-  console.log(callsCounter);
+  // callsCounter = callsCounter + 1;
+  // console.log(callsCounter);
   let data;
   // try {
   data = await recursiveFetch(`${url}`)
-    .then(res => {
-      console.log(res);
+    .then((res) => {
+      // console.log(res);
       return res.json();
     })
-    .then(res => {
+    .then((res) => {
       // console.log(res.data);
       return res.data;
     })
     .catch(() => {
-      console.log("error whit: ", url);
+      // console.log("error whit: ", url);
     });
-  console.log(2 - 3);
   return data;
 }
 async function getAssets() {
@@ -160,5 +159,5 @@ export default {
   getAsset,
   getMarkets,
   getExchange,
-  getAssetHistory
+  getAssetHistory,
 };

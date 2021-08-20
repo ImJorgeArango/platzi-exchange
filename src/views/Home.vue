@@ -2,7 +2,7 @@
   <div>
     <bounce-loader
       :loading="isLoading"
-      :color="'#68d391'"
+      :color="'#22543D'"
       :size="100"
       class="mt-20"
     />

@@ -3,7 +3,7 @@
     <div class="flex justify-center">
       <bounce-loader
         :loading="isLoading"
-        :color="'#68d391'"
+        :color="'#22543D'"
         :size="100"
         class="mt-20"
       />
@@ -55,8 +55,8 @@
           <button
             @click="toggleConverter"
             class="
-              bg-green-500
-              hover:bg-green-700
+              bg-green-700
+              hover:bg-green-900
               text-white
               font-bold
               py-2
@@ -100,13 +100,13 @@
 
       <line-chart
         class="my-10 hidden md:block"
-        :colors="['orange']"
+        :colors="['#A16F50']"
         :min="min"
         :max="max"
         :data="history.map((h) => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
 
-      <h3 class="text-xl my-10">Best offers</h3>
+      <h3 class="text-2xl my-10">Best offers</h3>
       <table>
         <tr
           v-for="m in markets"
@@ -131,7 +131,7 @@
             >
               <p>Get Link</p>
             </px-button>
-            <a v-else class="hover:underline text-green-600" target="_blanck">{{
+            <a v-else class="hover:underline text-green-700" target="_blanck">{{
               m.url
             }}</a>
           </td>

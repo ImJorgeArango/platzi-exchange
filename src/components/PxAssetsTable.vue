@@ -40,7 +40,7 @@
       <tr
         v-for="a in filteredAssets"
         :key="a.id"
-        class="border-b border-gray-200 hover:bg-gray-100 hover:bg-orange-100"
+        class="border-b border-gray-200 hover:bg-gray-100 hover:bg-pink-100"
       >
         <td>
           <img
@@ -54,7 +54,7 @@
         </td>
         <td>
           <router-link
-            class="hover:underline text-green-600"
+            class="hover:underline text-green-700"
             :to="{ name: 'coin-detail', params: { id: a.id } }"
             >{{ a.name }}</router-link
           >
@@ -67,8 +67,8 @@
         <td
           :class="
             a.changePercent24Hr.includes('-')
-              ? 'text-red-600'
-              : 'text-green-600'
+              ? 'text-red-700'
+              : 'text-green-700'
           "
         >
           {{ a.changePercent24Hr | percent }}

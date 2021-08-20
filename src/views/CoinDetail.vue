@@ -12,7 +12,9 @@
       <div class="flex flex-col sm:flex-row justify-around items-center mt-10">
         <div class="flex flex-col items-center">
           <img
-            :src="`https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`"
+            :src="
+              `https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`
+            "
             :alt="asset.name"
             class="w-20 h-20 mr-5"
           />
@@ -103,7 +105,7 @@
         :colors="['#A16F50']"
         :min="min"
         :max="max"
-        :data="history.map((h) => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
+        :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
 
       <h3 class="text-2xl my-10">Best offers</h3>
@@ -157,7 +159,7 @@ export default {
       history: [],
       markets: [],
       fromUsd: true,
-      convertValue: null,
+      convertValue: null
     };
   },
 
@@ -176,27 +178,27 @@ export default {
 
     min() {
       return Math.min(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
+        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
     },
 
     max() {
       return Math.max(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
+        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
     },
 
     avg() {
       return Math.abs(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
+        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
-    },
+    }
   },
 
   watch: {
     $route() {
       this.getCoin();
-    },
+    }
   },
 
   created() {
@@ -213,7 +215,7 @@ export default {
 
       return api
         .getExchange(exchange.exchangeId)
-        .then((res) => {
+        .then(res => {
           this.$set(exchange, "url", res.exchangeUrl);
         })
         .finally(() => {
@@ -228,7 +230,7 @@ export default {
       Promise.all([
         api.getAsset(id),
         api.getAssetHistory(id),
-        api.getMarkets(id),
+        api.getMarkets(id)
       ])
         .then(([asset, history, markets]) => {
           this.asset = asset;
@@ -239,8 +241,8 @@ export default {
           // });
         })
         .finally(() => (this.isLoading = false));
-    },
-  },
+    }
+  }
 };
 </script>
 

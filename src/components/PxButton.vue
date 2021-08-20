@@ -28,14 +28,14 @@ export default {
   props: {
     isLoading: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
 
   methods: {
     buttonClick() {
       this.$emit("custom-click");
-    },
-  },
+    }
+  }
 };
 </script>

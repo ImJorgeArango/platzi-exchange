@@ -19,18 +19,18 @@ export default {
       links: [
         {
           title: "BTC",
-          to: { name: "coin-detail", params: { id: "bitcoin" } },
+          to: { name: "coin-detail", params: { id: "bitcoin" } }
         },
         {
           title: "ETH",
-          to: { name: "coin-detail", params: { id: "ethereum" } },
+          to: { name: "coin-detail", params: { id: "ethereum" } }
         },
         {
           title: "XRP",
-          to: { name: "coin-detail", params: { id: "ripple" } },
-        },
+          to: { name: "coin-detail", params: { id: "ripple" } }
+        }
       ],
-      assets: [],
+      assets: []
     };
   },
   created() {
@@ -38,12 +38,12 @@ export default {
 
     api
       .getAssets()
-      .then((assets) => (this.assets = assets))
+      .then(assets => (this.assets = assets))
       .then(() => {
         for (let i = 0; i < 3; i++) {
           this.$set(this.links, i, {
             title: this.assets[i].symbol,
-            to: { name: "coin-detail", params: { id: this.assets[i].id } },
+            to: { name: "coin-detail", params: { id: this.assets[i].id } }
           });
 
           // this.links[i] = {
@@ -53,7 +53,7 @@ export default {
         }
         // console.log(this.assets);
       });
-  },
+  }
 };
 </script>
 

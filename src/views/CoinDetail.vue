@@ -242,6 +242,12 @@ export default {
         })
         .finally(() => (this.isLoading = false));
     }
+  },
+  metaInfo() {
+    return {
+      title: this.asset.name,
+      link: [{ rel: "favicon", href: "favicon.ico" }]
+    };
   }
 };
 </script>

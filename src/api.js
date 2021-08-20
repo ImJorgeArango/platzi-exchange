@@ -22,7 +22,7 @@ const url = "https://api.coincap.io/v2";
 // }
 
 function recursiveFetch(url) {
-  return fetch(`${url}`, { mode: "cors" }).then(async (res) => {
+  return fetch(`${url}`, { mode: "cors" }).then(async res => {
     if (res.status !== 429) {
       return res;
     } else {
@@ -41,11 +41,11 @@ async function delayedFetch(url) {
   let data;
   // try {
   data = await recursiveFetch(`${url}`)
-    .then((res) => {
+    .then(res => {
       // console.log(res);
       return res.json();
     })
-    .then((res) => {
+    .then(res => {
       // console.log(res.data);
       return res.data;
     })
@@ -159,5 +159,5 @@ export default {
   getAsset,
   getMarkets,
   getExchange,
-  getAssetHistory,
+  getAssetHistory
 };

@@ -33,6 +33,10 @@ export default {
       .getAssets()
       .then(assets => (this.assets = assets))
       .finally(() => (this.isLoading = false));
+  },
+  metaInfo: {
+    title: "Your Crypto Exchange",
+    link: [{ rel: "favicon", href: "favicon.ico" }]
   }
 };
 </script>

@@ -6,7 +6,7 @@
         <router-link
           :to="{ name: 'home' }"
           class="font-semibold text-xl tracking-tight"
-          >Platzi Exchange</router-link
+          >Your Crypto Exchange</router-link
         >
       </div>
       <div
